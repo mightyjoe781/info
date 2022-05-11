@@ -41,12 +41,14 @@ end
 minetest.register_chatcommand("info", {
 	description = "[set | rem] [number] [msg]",
 	paramas = "[set | rem] [number] [msg]",
-	privs = {ban=true},
 	func = function(name, param)
 		local param = param:split(" ")
 		if #param == 0 then
 			get_info(name)
 		elseif #param >= 2 then
+			if not minetest.check_player_privs(name,"ban") then
+			return false, "Invalid priv level to update announcements."
+			end
 			-- attach parameters
 			local msg = ""
 			if param[1] == "set" then
