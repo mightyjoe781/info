@@ -1,13 +1,13 @@
 ---------------ANNOUNCEMENT---------------
 
-dofile(minetest.get_modpath("info").."/api.lua")
+-- dofile(minetest.get_modpath("info").."/api.lua")
+require("api")
 -- local storage = minetest.get_mod_storage()
 
-local function send_info(name) minetest.chat_send_player(name,minetest.colorize("#ff3300"),info.display_banner())
+local function send_info(name)
+    minetest.chat_send_player(name,minetest.colorize("#ff3300"),info.display_banner())
     for element in info.info_iter() do
-        if element ~= "" then
-            minetest.chat_send_player(name, minetest.colorize("33ff33"), "*"..element)
-        end
+        minetest.chat_send_player(name, minetest.colorize("33ff33"), "*"..element)
     end
 end
 
@@ -48,5 +48,5 @@ minetest.register_chatcommand("info", {
 
 minetest.register_on_joinplayer(function(player)
 	local name = player:get_player_name();
-	minetest.after(10,send_info(name), name);
+	minetest.after(10,send_info, name);
 end)
