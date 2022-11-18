@@ -5,9 +5,9 @@ require("api")
 -- local storage = minetest.get_mod_storage()
 
 local function send_info(name)
-    minetest.chat_send_player(name,minetest.colorize("#ff3300"),info.display_banner())
+    minetest.chat_send_player(name,minetest.colorize("#ff3300",info.display_banner()))
     for element in info.info_iter() do
-        minetest.chat_send_player(name, minetest.colorize("33ff33"), "*"..element)
+        minetest.chat_send_player(name, minetest.colorize("33ff33", "*"..element))
     end
 end
 
